@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<h1>Homeie Page</h1>
-
+	<h1>Homeie Page</h1>
+	<form action="#" th:action="@{/form}" th:object="${form}" method="POST">
+		<label for="firstName">name:</label>
+    	<input type="text" th:field="*{name}" value="John" />
+            
+    	<label for="lastName">words</label>
+    	<input type="text" th:field="*{words}" value="Wayne" />
+		<input type="submit" />
+	</form>
 </body>
 </html>
