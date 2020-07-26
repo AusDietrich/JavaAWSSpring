@@ -1,14 +1,18 @@
 package personal.portfolio.api;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PortfolioController {
 
-	@RequestMapping(method = RequestMethod.GET, value = "/")
-	public String index() {
+	@GetMapping("/")
+	public String index(HttpServletRequest request) {
+		if (request.isUserInRole("USER")) {
+		return "homeiePage";	
+		}
 		return "homePage";
 	}
 }
