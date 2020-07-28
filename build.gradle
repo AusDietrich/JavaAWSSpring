@@ -12,7 +12,9 @@ sourceCompatibility = '1.8'
 repositories {
 	mavenCentral()
 }
-
+war {
+    enabled=true
+}
 dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.8'
 	annotationProcessor 'org.projectlombok:lombok:1.18.8'
