@@ -17,12 +17,12 @@ public class MultipleEntryPointsSecurityConfig {
     public UserDetailsService userDetailsService() throws Exception {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User
-          .withUsername("user")
-          .password(encoder().encode("userPass"))
+          .withUsername("xxxx")
+          .password(encoder().encode("xxx"))
           .roles("USER").build());
         manager.createUser(User
-          .withUsername("admin")
-          .password(encoder().encode("adminPass"))
+          .withUsername("yyy")
+          .password(encoder().encode("yyyy"))
           .roles("ADMIN").build());
         return manager;
     }
