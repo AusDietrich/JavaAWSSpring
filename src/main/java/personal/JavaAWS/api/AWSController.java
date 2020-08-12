@@ -26,7 +26,7 @@ import personal.JavaAWS.svc.PortfolioSvc;
 public class AWSController {
 
 	@Autowired
-	UserRepo repo; 
+	UserRepo repo;
 	@Autowired
 	PortfolioSvc portfolioSvc;
 
