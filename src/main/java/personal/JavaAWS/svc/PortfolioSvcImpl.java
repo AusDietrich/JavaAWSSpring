@@ -19,7 +19,6 @@ public class PortfolioSvcImpl implements PortfolioSvc {
 	
 	@Override
 	public BasicForm repeater(BasicForm basicForm) {
-		System.out.println(basicForm.toString());
 		return basicForm;
 	}
 

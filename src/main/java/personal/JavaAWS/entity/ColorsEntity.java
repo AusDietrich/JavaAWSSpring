@@ -16,10 +16,12 @@ public class ColorsEntity {
 	@Id
 	@Column(name="id")
 	public int id;
-	@Column(name="colors")
-	public String colors;
+	@Column(name="colorimg")
+	public String colorImg;
+	@Column(name="title")
+	public String title;
 	@Column(name="price")
-	public double price;
+	public Double price;
 	@Column(name="description")
 	public String description;
 }
