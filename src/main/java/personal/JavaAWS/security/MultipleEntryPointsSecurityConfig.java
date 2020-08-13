@@ -17,7 +17,7 @@ public class MultipleEntryPointsSecurityConfig {
     public UserDetailsService userDetailsService() throws Exception {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User
-          .withUsername("xxxx")
+          .withUsername("xxx")
           .password(encoder().encode("xxx"))
           .roles("USER").build());
         manager.createUser(User
