@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import personal.JavaAWS.entity.ColorsEntity;
-import personal.JavaAWS.model.BasicForm;
 import personal.JavaAWS.repo.ColorsRepo;
 
 
@@ -18,8 +17,9 @@ public class PortfolioSvcImpl implements PortfolioSvc {
 	ColorsRepo colorsRepo;
 	
 	@Override
-	public BasicForm repeater(BasicForm basicForm) {
-		return basicForm;
+	public ColorsEntity addColor(ColorsEntity colorForm) {
+		colorsRepo.save(colorForm);
+		return colorForm;
 	}
 
 	@Override
@@ -27,5 +27,10 @@ public class PortfolioSvcImpl implements PortfolioSvc {
 		Iterable<ColorsEntity> allColors = colorsRepo.findAll();
 		Iterator<ColorsEntity> iterColor = allColors.iterator();
 		return iterColor;
+	}
+	
+	@Override
+	public void removeColor(ColorsEntity colorsForm) {
+		colorsRepo.deleteById(colorsForm.getId());
 	}
 }

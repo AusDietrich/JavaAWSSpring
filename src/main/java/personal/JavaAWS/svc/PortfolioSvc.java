@@ -1,14 +1,14 @@
 package personal.JavaAWS.svc;
 
 import java.util.Iterator;
-import java.util.List;
 
 import personal.JavaAWS.entity.ColorsEntity;
-import personal.JavaAWS.model.BasicForm;
 
 public interface PortfolioSvc {
 
-	public BasicForm repeater(BasicForm basicForm);
+	public ColorsEntity addColor(ColorsEntity colorForm);
 	
 	public Iterator<ColorsEntity> allColors();
+	
+	public void removeColor(ColorsEntity colorsForm);
 }

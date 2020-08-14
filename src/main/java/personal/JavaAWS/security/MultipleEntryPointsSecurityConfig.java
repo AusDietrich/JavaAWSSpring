@@ -1,5 +1,6 @@
 package personal.JavaAWS.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,16 +14,25 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class MultipleEntryPointsSecurityConfig {
 
+	@Value("${usersName}")
+	public String userName;
+	@Value("${adminName}")
+	public String adminName;
+	@Value("${userPass}")
+	public String userPass;
+	@Value("${adminPass}")
+	public String adminPass;
+	
 	@Bean
     public UserDetailsService userDetailsService() throws Exception {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User
-          .withUsername("xxx")
-          .password(encoder().encode("xxx"))
+          .withUsername(userName)
+          .password(encoder().encode(userPass))
           .roles("USER").build());
         manager.createUser(User
-          .withUsername("yyy")
-          .password(encoder().encode("yyyy"))
+          .withUsername(adminName)
+          .password(encoder().encode(adminPass))
           .roles("ADMIN").build());
         return manager;
     }

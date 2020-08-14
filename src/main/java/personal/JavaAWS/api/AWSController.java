@@ -17,25 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import personal.JavaAWS.entity.ColorsEntity;
-import personal.JavaAWS.entity.User;
-import personal.JavaAWS.model.BasicForm;
-import personal.JavaAWS.repo.UserRepo;
 import personal.JavaAWS.svc.PortfolioSvc;
 
 @RestController
 public class AWSController {
 
-	@Autowired
-	UserRepo repo;
+
 	@Autowired
 	PortfolioSvc portfolioSvc;
 
 	@RequestMapping("/")
-	public ModelAndView index(HttpServletRequest request, Model model, BasicForm basicForm) {
+	public ModelAndView index(HttpServletRequest request, Model model, ColorsEntity colorsForm) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (request.isUserInRole("USER")) {
-			model.addAttribute("form", basicForm);
-			modelAndView.setViewName("homeiePage");
+			model.addAttribute("colorForm", colorsForm);
+			modelAndView.setViewName("colorInsert");
 			return modelAndView;
 		}
 		modelAndView.setViewName("homePage");
@@ -43,23 +39,18 @@ public class AWSController {
 	}
 
 	@RequestMapping("/form")
-	public ModelAndView output(BasicForm basicForm, Model model) {
-		model.addAttribute("form", basicForm);
-		portfolioSvc.repeater(basicForm);
+	public ModelAndView output(ColorsEntity colorsForm, Model model) {
+		System.out.println(colorsForm);
+		portfolioSvc.addColor(colorsForm);
+		model.addAttribute("form", colorsForm);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("outputPage");
 		return modelAndView;
 	}
-
-	@RequestMapping("/RDS")
-	public ModelAndView AWSRDS(Model model) {
-		User user = repo.findUsers();
-		model.addAttribute("user", user);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("RDS");
-		return modelAndView;
+	@RequestMapping("/delete")
+	public void remove(ColorsEntity colorsForm) {
+		portfolioSvc.removeColor(colorsForm);
 	}
-
 	@RequestMapping("/Colors")
 	public List<ColorsEntity> AllStored() {
 		Iterator<ColorsEntity> allColors = portfolioSvc.allColors();
