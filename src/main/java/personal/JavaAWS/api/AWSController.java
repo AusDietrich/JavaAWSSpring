@@ -29,9 +29,13 @@ public class AWSController {
 	@RequestMapping("/")
 	public ModelAndView index(HttpServletRequest request, Model model, ColorsEntity colorsForm) {
 		ModelAndView modelAndView = new ModelAndView();
-		if (request.isUserInRole("USER")) {
+		if (request.isUserInRole("ADMIN")) {
 			model.addAttribute("colorForm", colorsForm);
 			modelAndView.setViewName("colorInsert");
+			return modelAndView;
+		} else if (request.isUserInRole("SUPERADMIN")) {
+			model.addAttribute("colorForm", colorsForm);
+			modelAndView.setViewName("superAdminPage");
 			return modelAndView;
 		}
 		modelAndView.setViewName("homePage");

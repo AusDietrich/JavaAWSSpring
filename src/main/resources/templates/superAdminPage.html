@@ -15,5 +15,11 @@
 		<input type="number" id="price" step="any" th:field="*{price}" min="0">
 		<input type="submit" />
 	</form>
+	<h1>Remove Color Page</h1>
+	<form action="#" th:action="@{/delete}" th:object="${colorForm}" method="POST">
+		<label for="id">Id:</label>
+    	<input type="text" th:field="*{id}" value="0" />
+		<input type="submit" />
+    </form>
 </body>
 </html>
