@@ -2,6 +2,7 @@ package personal.JavaAWS.svc;
 
 import java.util.Iterator;
 
+import personal.JavaAWS.entity.ColorAngularEntity;
 import personal.JavaAWS.entity.ColorsEntity;
 
 public interface PortfolioSvc {
