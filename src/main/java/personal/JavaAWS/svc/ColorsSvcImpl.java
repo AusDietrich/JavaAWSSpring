@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import personal.JavaAWS.entity.ColorsEntity;
+import personal.JavaAWS.entity.ErrorMessage;
 import personal.JavaAWS.repo.ColorsRepo;
 
 
@@ -15,6 +16,8 @@ public class ColorsSvcImpl implements ColorsSvc {
 
 	@Autowired
 	ColorsRepo colorsRepo;
+	@Autowired
+	RestSvc restSvc;
 	
 	@Override
 	public ColorsEntity addColor(ColorsEntity colorForm) {
@@ -33,5 +36,4 @@ public class ColorsSvcImpl implements ColorsSvc {
 	public void removeColor(ColorsEntity colorsForm) {
 		colorsRepo.deleteById(colorsForm.getId());
 	}
-	
 }

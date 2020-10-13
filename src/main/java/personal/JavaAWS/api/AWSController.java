@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import personal.JavaAWS.entity.ColorsEntity;
+import personal.JavaAWS.entity.ErrorMessage;
 import personal.JavaAWS.entity.Form;
 import personal.JavaAWS.entity.WeatherEnt;
 import personal.JavaAWS.svc.ColorsSvc;
@@ -85,25 +88,27 @@ public class AWSController {
 	}
 	
 	@RequestMapping(value="/Weather/{formString}")
-	public @ResponseBody List<WeatherEnt> weatherSvc( @PathVariable(value="formString") String formString) {
+	public @ResponseBody List<WeatherEnt> weatherSvc( @PathVariable(value="formString") String formString){
 		ObjectMapper objectMapper = new ObjectMapper();
 		Form form = new Form();
 		try {
 			form = objectMapper.readValue(formString, Form.class);
+			System.out.println(form);
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<WeatherEnt> weatherList = new ArrayList<>();
+		System.out.println(form);
 		if (form.async==true) {
     		weatherList = weatherAsync.AsyncWeatherCall(form);
     	}
     	else {
     		weatherList = weatherSync.SyncWeatherCall(form);
     	}
+		System.out.println("afterForm"+form);
 		return weatherList;
 	}
+	
 }

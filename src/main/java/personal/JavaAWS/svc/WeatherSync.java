@@ -9,5 +9,5 @@ import personal.JavaAWS.entity.WeatherEnt;
 
 public interface WeatherSync {
 
-	public List<WeatherEnt> SyncWeatherCall(Form form);
+	public List<WeatherEnt> SyncWeatherCall (Form form);
 }
