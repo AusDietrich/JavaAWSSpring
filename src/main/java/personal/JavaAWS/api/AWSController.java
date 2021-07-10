@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import personal.JavaAWS.entity.ColorsEntity;
 import personal.JavaAWS.entity.ErrorMessage;
 import personal.JavaAWS.entity.Form;
+import personal.JavaAWS.entity.LightForm;
 import personal.JavaAWS.entity.WeatherEnt;
 import personal.JavaAWS.svc.ColorsSvc;
 import personal.JavaAWS.svc.WeatherAsync;
@@ -110,5 +111,23 @@ public class AWSController {
 		System.out.println("afterForm"+form);
 		return weatherList;
 	}
-	
+	@Autowired
+	LightForm lightForm;
+	@RequestMapping(value="/smrtHaus")
+	public @ResponseBody ModelAndView ledString(Model model,LightForm formString) {
+		System.out.println(formString);
+		lightForm = formString;
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("smrtHaus");
+		return modelAndView;
+	}
+	@RequestMapping(value="/ledLight")
+	public String restLED() {
+		String returnFormat = "";
+		returnFormat+=lightForm.getLedNum()+"L";
+		returnFormat+=lightForm.getRed()+"R";
+		returnFormat+=lightForm.getGreen()+"G";
+		returnFormat+=lightForm.getBlue()+"B";
+		return returnFormat;
+	}
 }
